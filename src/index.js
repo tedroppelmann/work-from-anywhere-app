@@ -3,10 +3,51 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { 
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+import Home from './pages/Home';
+import SignUp from './pages/SignUp';
+import LogIn from './pages/LogIn';
+import SignUpLandlord from './pages/SignUpLandlord';
+import CreatePlace from './pages/CreatePlace';
+import Places from './pages/Places';
+import Place from './pages/Place';
+import Profile from './pages/Profile';
+import NextBookings from './pages/NextBookings';
+import PersonalData from './pages/PersonalData'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route path="/" element={<Home />} />
+          <Route path="sign_up" element={<SignUp />} />
+          <Route path="log_in" element={<LogIn />} />
+          <Route path="sign_up_landlord" element={<SignUpLandlord />}/>
+          <Route path="create_place" element={<CreatePlace />} />
+          <Route path="places" element={<Places />} >
+            <Route path=":placeId" element={<Place />} />
+          </Route>
+          <Route path="profile" element={<Profile />} >
+            <Route path="personal_data" element={<PersonalData />} />
+            <Route path="next_bookings" element={<NextBookings />} />
+          </Route>
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
+        </Route>
+      </Routes>
+    </BrowserRouter>,
   </React.StrictMode>,
   document.getElementById('root')
 );
