@@ -40,7 +40,7 @@ function Place() {
             </div>
             <div class='columns'>
                 <div class='column is-3'>
-                    <div class='section' margin-left= 'auto'>
+                    <div class='section'>
                         <CalendarComponent place={params.placeId} name={place.name}/>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, registerWithEmailAndPassword } from "../Firebase";
 import Spinner from '../components/Spinner'
+import WaitingList from '../components/WaitingList'
 
 function SignUpLandlord() {
   const [name, setName] = useState("");
@@ -30,7 +31,10 @@ function SignUpLandlord() {
   }
 
   return (
-    <div class="section is-medium">
+    <div>
+      <WaitingList />
+      {/*
+      <div class="section is-medium">
       <div class='box column is-half is-offset-one-quarter'>
         <h1 class="title">Sign up as a landlord</h1>
         <div class="field">
@@ -73,6 +77,8 @@ function SignUpLandlord() {
           <strong>Sign up</strong>
         </button>
       </div>
+      </div>
+      */}
     </div>
   )
 }

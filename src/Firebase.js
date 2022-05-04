@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -28,6 +29,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -130,4 +132,5 @@ export {
   logout,
   addPlace,
   addBooking,
+  analytics,
 };

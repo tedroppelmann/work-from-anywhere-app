@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, registerWithEmailAndPassword } from "../Firebase";
 import Spinner from '../components/Spinner'
+import WaitingList from '../components/WaitingList';
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -19,7 +20,6 @@ function SignUp() {
   const submit = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password, type);
-
   };
 
   if (loading) {
@@ -29,6 +29,12 @@ function SignUp() {
   }
 
   return (
+    <div>
+      <WaitingList />
+    {/*
+
+    THIS PART CREATES THE USER. IT IS READY
+
     <div class="section is-medium">
       <div class='box column is-half is-offset-one-quarter'>
         <h1 class="title">Sign up</h1>
@@ -72,6 +78,9 @@ function SignUp() {
           <strong>Sign up</strong>
         </button>
       </div>
+    </div>
+    */}
+
     </div>
   )
 }

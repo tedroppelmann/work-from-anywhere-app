@@ -18,7 +18,8 @@ import Places from './pages/Places';
 import Place from './pages/Place';
 import Profile from './pages/Profile';
 import NextBookings from './pages/NextBookings';
-import PersonalData from './pages/PersonalData'
+import PersonalData from './pages/PersonalData';
+import Services from './pages/Services';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -30,13 +31,13 @@ ReactDOM.render(
           <Route path="log_in" element={<LogIn />} />
           <Route path="sign_up_landlord" element={<SignUpLandlord />}/>
           <Route path="create_place" element={<CreatePlace />} />
-          <Route path="places" element={<Places />} >
-            <Route path=":placeId" element={<Place />} />
-          </Route>
+          <Route path=":cityName" element={<Places />} />
+          <Route path="places/:placeId" element={<Place />} />
           <Route path="profile" element={<Profile />} >
             <Route path="personal_data" element={<PersonalData />} />
             <Route path="next_bookings" element={<NextBookings />} />
           </Route>
+          <Route path="places/:placeId/services" element={<Services />} />
           <Route
             path="*"
             element={

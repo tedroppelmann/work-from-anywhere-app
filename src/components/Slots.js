@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthState } from "react-firebase-hooks/auth";
-import { db, auth, addBooking } from "../Firebase";
+import { db, auth, analytics, addBooking } from "../Firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
+import { logEvent } from "firebase/analytics";
 
 
 function Slots(props) {
@@ -20,15 +21,8 @@ function Slots(props) {
     }, [props.date])
 
     const slots = [
-        {startTime: '09:00'},
-        {startTime: '10:00'},
-        {startTime: '11:00'},
-        {startTime: '12:00'},
-        {startTime: '13:00'},
-        {startTime: '14:00'},
-        {startTime: '15:00'},
-        {startTime: '16:00'},
-        {startTime: '17:00'},
+        {startTime: '08:00 - 13:00'},
+        {startTime: '13:00 - 18:00'},
     ];
 
     const selectSlot = slot => {
@@ -38,6 +32,7 @@ function Slots(props) {
     const submit = () => {
         addBooking(placeId, date, slotSelected.startTime, user.uid, placeName);
         setSlotSelected('');
+        logEvent(analytics, 'confirm_booking');
         navigate('/profile/next_bookings');
     }
 
@@ -65,33 +60,33 @@ function Slots(props) {
         return result;
     }, []);
 
-    if (user) {
-        return (
-            <div flex={1/2}>
-                <br/>
-                <h1 class="title is-5">Slots</h1>
-                {splitEvery(slots, 3).map((group) =>
-                    <div className="columns is-multiline">
-                        {group.map((slot) => (
-                            <div className="column is-one-third" key={slot.startTime}>
-                                {bookings.includes(String(slot.startTime)) ?
-                                    <button class="button is-light" disabled> 
-                                        {slot.startTime} 
-                                    </button>
-                                :
-                                slot.startTime == slotSelected.startTime ? 
-                                    <button class="button is-primary" onClick={() => selectSlot(slot)} key={slot.startTime}> 
-                                        {slot.startTime} 
-                                    </button>
-                                :
-                                    <button class="button" onClick={() => selectSlot(slot)} key={slot.startTime}> 
-                                        {slot.startTime} 
-                                    </button>
-                                }       
-                            </div>
-                        ))}
-                    </div>
-                )}
+    return (
+        <div flex={1/2}>
+            <br/>
+            <h1 class="title is-5">Slots</h1>
+            {splitEvery(slots, 2).map((group) =>
+                <div className="columns is-multiline">
+                    {group.map((slot) => (
+                        <div className="column is-one-half" key={slot.startTime}>
+                            {bookings.includes(String(slot.startTime)) ?
+                                <button class="button is-light" disabled> 
+                                    {slot.startTime} 
+                                </button>
+                            :
+                            slot.startTime == slotSelected.startTime ? 
+                                <button class="button is-primary"> 
+                                    {slot.startTime} 
+                                </button>
+                            :
+                                <button class="button" onClick={() => selectSlot(slot)} key={slot.startTime}> 
+                                    {slot.startTime} 
+                                </button>
+                            }       
+                        </div>
+                    ))}
+                </div>
+            )}
+            {user ? 
                 <div>
                     {slotSelected ? 
                         <button class="button is-primary" onClick={submit}>
@@ -103,17 +98,13 @@ function Slots(props) {
                         </button>
                     }
                 </div>
-            </div>
-        )
-    } else {
-        return(
-            <div>
-                <br/>
-                <h1 class="title is-5">Slots</h1>
-                You have to be logged in to book a place.
-            </div>
-        )
-    };
+            :
+                <div>
+                    You have to be logged in to book a place.
+                </div>
+            }   
+        </div>
+    )
 } 
 
 export default Slots

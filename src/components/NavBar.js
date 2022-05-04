@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, db, logout } from "../Firebase";
+import { auth, db, logout, analytics } from "../Firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
+import { logEvent } from "firebase/analytics";
 
 function Header() {
   const [user, loading, error] = useAuthState(auth);
@@ -27,8 +28,13 @@ function Header() {
     }
   };
 
+  const becomeMember = () => {
+    logEvent(analytics, 'click_on_sign_up');
+    navigate('/sign_up');
+  }
+
   //OJO ACA no funciona bien
-  if (!loading && name) {
+  if (!loading) {
     return (
       <nav class="navbar is-light" role="navigation" aria-label="main navigation">
   
@@ -61,11 +67,16 @@ function Header() {
                 </div>
               :
                 <div class="buttons">
+                  {/*
+                  <button class="button is-light"  onClick={this}>
+                    What is WFA?
+                  </button>
                   <button class="button is-light"  onClick={() => navigate('/sign_up_landlord')}>
                     I have a place...
                   </button>
-                  <button class="button is-primary" onClick={() => navigate('/sign_up')}>
-                    <strong>Sign up</strong>
+                  */}
+                  <button class="button is-info" onClick={becomeMember}>
+                    <strong>Become a member</strong>
                   </button>
                   <button class="button is-light"  onClick={() => navigate('/log_in')}>
                     <strong>Log in</strong>

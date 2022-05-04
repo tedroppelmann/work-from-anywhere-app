@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../Firebase";
+import { auth, logInWithEmailAndPassword, analytics } from "../Firebase";
+import { logEvent } from "firebase/analytics";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 function LogIn() {
@@ -16,6 +17,11 @@ function LogIn() {
     }
     if (user) navigate("/");
   }, [user, loading]);
+
+  const becomeMember = () => {
+    logEvent(analytics, 'click_on_sign_up');
+    navigate('/sign_up');
+  }
 
   return (
     <div class="section is-medium">
@@ -44,8 +50,13 @@ function LogIn() {
             />
           </div>
         </div>
-        <button class="button is-primary is-centered" onClick={() => logInWithEmailAndPassword(email, password)}>
-          <strong>Log in</strong>
+        <div>
+          <button class="button is-primary is-centered" onClick={() => logInWithEmailAndPassword(email, password)}>
+            <strong>Log in</strong>
+          </button>
+        </div>
+        <button class="button is-text is-fullwidth" onClick={becomeMember}>
+          Or become a member
         </button>
       </div>
     </div>
