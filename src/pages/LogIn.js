@@ -51,7 +51,7 @@ function LogIn() {
           </div>
         </div>
         <div>
-          <button class="button is-primary is-centered" onClick={() => logInWithEmailAndPassword(email, password)}>
+          <button class="button is-info" onClick={() => logInWithEmailAndPassword(email, password)}>
             <strong>Log in</strong>
           </button>
         </div>

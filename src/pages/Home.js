@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import { analytics } from "../Firebase";
 import { logEvent } from "firebase/analytics";
-
+import Footer from '../components/Footer';
 import { CITIES } from '../storage/cities/cities';
 
 function Home() {
@@ -37,7 +37,7 @@ function Home() {
 
   const submit = (city) => {
     logEvent(analytics, 'click_on_' + city.name);
-    navigate('/' + city.name, {state: {cityName: city.name,}});
+    navigate('/' + city.name);
   }
 
   //Below Part is referred from
@@ -64,14 +64,14 @@ function Home() {
         </div>
       </section>
       <section class='section'>
-      <h1 class="title has-text-centered">A little about us</h1>
+      <h1 class="title has-text-centered">A little about us...</h1>
       <br/>
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <div class="tile">
             <div class="tile is-parent is-vertical">
               <article class="tile is-child notification is-info has-text-centered">
-                <p class="title">WHAT</p>
+                <p class="title is-family-code">WHAT</p>
                   <div class='container'>
                     <p class="subtitle">We are devoted to build a platform connecting real estate owners with knowledgeable workers and students. A gate to transform your work-from-anywhere experience by using different spaces from anywhere.</p>
                   </div>
@@ -79,7 +79,7 @@ function Home() {
             </div>
             <div class="tile is-parent">
               <article class="tile is-child notification is-info has-text-centered">
-                <p class="title">WHY</p>
+                <p class="title is-family-code">WHY</p>
                 <p class="subtitle">It's easy!</p>
                 <div class='container'>
                   <p class="subtitle">A single portal that allows you to keep everything under control: accommodation, workspaces reservations, courses, sports and local activities, networking and volunteering.</p>
@@ -90,7 +90,7 @@ function Home() {
           </div>
           <div class="tile is-parent">
             <article class="tile is-child notification is-info has-text-centered">
-              <p class="title">WHEN</p>
+              <p class="title is-family-code">WHEN</p>
               <p class="subtitle">Whatever you want!</p>
               <p class="subtitle">A short period of one day! A short rent! A long rent! Make sure you have necessary things in your bag and that's it! You are ready to join us.</p>
 
@@ -100,7 +100,7 @@ function Home() {
         <div class="tile is-parent">
           <article class="tile is-child notification is-info has-text-centered">
             <div class="content">
-              <p class="title">WHO</p>
+              <p class="title is-family-code">WHO</p>
               <p class="subtitle">We appeal to:</p>
               <div class='container'>
                 <p class="subtitle"> Remote workers who want to combine productivity with the thrill of discovery and personal growth.</p>
@@ -135,6 +135,7 @@ function Home() {
           </div>
         ))}
       </section>
+      <Footer />
     </div>
   )
 }

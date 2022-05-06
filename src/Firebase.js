@@ -122,6 +122,17 @@ const addBooking = async (placeId, date, slot, user, placeName) => {
   }
 }
 
+const addInterested = async (email) => {
+  try {
+    await addDoc(collection(db, "interested"), {
+      email
+    });
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+}
+
 export {
   auth,
   db,
@@ -132,5 +143,6 @@ export {
   logout,
   addPlace,
   addBooking,
+  addInterested,
   analytics,
 };

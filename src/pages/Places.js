@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { db } from "../Firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import Spinner from '../components/Spinner'
@@ -56,12 +55,13 @@ function Places() {
                     <div className="card is-clickable" 
                     onClick={() => navigate('/places/'+ place.id, {
                         state: {
-                        placeId: place.id,
-                        }
-                    })}>
+                            cityName: params.cityName
+                        },
+                    })
+                    }>
                     <div className="card-content">
                         <figure class="image is-256x256">
-                        <img src="https://bulma.io/images/placeholders/128x128.png"/>
+                            <img src={require('../storage/place/photo_0.jpg')}/>
                         </figure>
                         <br/>
                         <div className="title is-4">{place.data.name}</div>

@@ -29,8 +29,9 @@ function CalendarComponent(props) {
     }
 
     return (
-        <div class='container'>
-            <h1 class="title is-4">Schedule</h1>
+        <div class='box'>
+            <h1 class="title is-4">Book</h1>
+            <h2 class="subtitle">Start by choosing your dates</h2>
             <Calendar 
                 onChange={onChange} 
                 
@@ -42,15 +43,19 @@ function CalendarComponent(props) {
             />
             {/*<Slots date={date} placeId={placeId} placeName={placeName}/>*/}
             <br/>
-            {dateSelected ? 
-                <button class="button is-primary" onClick={sumbit}>
-                    Next
-                </button>
-            :
-                <button class="button is-primary" disabled>
-                    Next
-                </button>
-            }
+            <div class='columns is-centered'>
+                <div class='column is-narrow'>
+                    {dateSelected ? 
+                        <button class="button is-info" onClick={sumbit}>
+                            Next
+                        </button>
+                    :
+                        <button class="button is-info" disabled>
+                            Next
+                        </button>
+                    }
+                </div>
+            </div>
         </div>
     )
 }

@@ -47,7 +47,7 @@ function Services() {
                         {group.map((service) => (
                             <div className="column is-one-half" key={service.name}>
                                 {servicesSelected.includes(String(service.name)) ?
-                                    <button class="button is-success is-fullwidth" onClick={() => unselectService(service.name)} key={service.name}> 
+                                    <button class="button is-info is-fullwidth" onClick={() => unselectService(service.name)} key={service.name}> 
                                         {service.name}
                                     </button>
                                 :
@@ -59,7 +59,7 @@ function Services() {
                         ))}
                     </div>
                 )}
-                <button class="button is-primary" onClick={submit}>
+                <button class="button is-info" onClick={submit}>
                     Confirm
                 </button>
             </div>
