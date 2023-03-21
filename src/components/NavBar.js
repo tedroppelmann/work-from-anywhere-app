@@ -8,6 +8,7 @@ import { logEvent } from "firebase/analytics";
 function Header() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState(false);
+  const [isActive, setisActive] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,52 +34,68 @@ function Header() {
     navigate('/sign_up');
   }
 
+  const logIn = () => {
+    logEvent(analytics, 'click_on_log_in');
+    navigate('/log_in');
+  }
+
   //OJO ACA no funciona bien
   if (!loading) {
     return (
-      <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-light" role="navigation" aria-label="main navigation">
   
-        <div class="navbar-brand">
-          <a class="navbar-item" onClick={() => navigate('/')}>
-            <h1 class="title is-4">Work from Anywhere</h1>
+        <div className="navbar-brand">
+          <a className="navbar-item" onClick={() => navigate('/')}>
+            <h1 className="title is-4">Work from Anywhere</h1>
           </a>
   
-          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a
+            onClick={() => {
+              setisActive(!isActive);
+            }}
+            role="button"
+            className={`navbar-burger burger ${isActive ? "is-active" : ""}`}
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+          >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
           </a>
         </div>
-  
-        <div class="navbar-menu">
-          <div class="navbar-start">
+        <div
+          id="navbarBasicExample"
+          className={`navbar-menu ${isActive ? "is-active" : ""}`}
+        >
+          <div className="navbar-start">
   
           </div>
-          <div class="navbar-end">
-            <div class="navbar-item">
+          <div className="navbar-end">
+            <div className="navbar-item">
               {user?
-                <div class="buttons">
-                  <button class="button is-light" onClick={() => navigate('/profile/next_bookings')}>
+                <div className="buttons">
+                  <button className="button is-light" onClick={() => navigate('/profile/next_bookings')} disabled>
                     <strong>{name}</strong>
                   </button>
-                  <button class="button is-danger" onClick={logout}>
+                  <button className="button is-danger" onClick={logout}>
                     <strong>Log Out</strong>
                   </button>
                 </div>
               :
-                <div class="buttons">
+                <div className="buttons">
                   {/*
-                  <button class="button is-light"  onClick={this}>
+                  <button className="button is-light"  onClick={this}>
                     What is WFA?
                   </button>
-                  <button class="button is-light"  onClick={() => navigate('/sign_up_landlord')}>
+                  <button className="button is-light"  onClick={() => navigate('/sign_up_landlord')}>
                     I have a place...
                   </button>
                   */}
-                  <button class="button is-info" onClick={becomeMember}>
+                  <button className="button is-info" onClick={becomeMember}>
                     <strong>Become a member</strong>
                   </button>
-                  <button class="button is-light"  onClick={() => navigate('/log_in')}>
+                  <button className="button is-light"  onClick={logIn}>
                     <strong>Log in</strong>
                   </button>
                 </div>

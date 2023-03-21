@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom'
-import { analytics } from "../Firebase";
-import { logEvent } from "firebase/analytics";
+import CitySelector from '../components/CitySelector';
 import Footer from '../components/Footer';
-import { CITIES } from '../storage/cities/cities';
 
 function Home() {
   /*
@@ -11,8 +9,6 @@ function Home() {
   const [loading, setLoading] = useState(true);
   */
   const navigate = useNavigate();
-
-  const cities = CITIES;
 
   /*
   useEffect(() => {
@@ -33,12 +29,13 @@ function Home() {
       alert("An error occured while fetching user data");
     }
   };
-  */
+
 
   const submit = (city) => {
     logEvent(analytics, 'click_on_' + city.name);
     navigate('/' + city.name);
   }
+  
 
   //Below Part is referred from
   //https://stackoverflow.com/questions/54187450/add-new-columns-container-every-3-column-elements-in-react-js-with-bulma-css
@@ -48,74 +45,77 @@ function Home() {
     result[Math.floor(index / length)].push(item);
     return result;
   }, []);
+  */
 
   return (
     <div className="Home">
-      <section class="section">
-        <div class='columns is-vcentered'>
-          <div class='column'>
-            <h1 class="title is-1 has-text-centered">WORK FROM ANYWHERE</h1>
+      <section className="section">
+        <div className='columns is-vcentered'>
+          <div className='column'>
+            <h1 className="title is-1 has-text-centered">WORK FROM ANYWHERE</h1>
           </div>
-          <div class='column'>
-            <figure class="image container is-square">
+          <div className='column'>
+            <figure className="image container is-square">
               <img src={require('../storage/icons/wfa.jpg')}/>
             </figure>
           </div>
         </div>
       </section>
-      <section class='section'>
-      <h1 class="title has-text-centered">A little about us...</h1>
+      <section className='section'>
+      <h1 className="title has-text-centered">A little about us...</h1>
       <br/>
-      <div class="tile is-ancestor">
-        <div class="tile is-vertical is-8">
-          <div class="tile">
-            <div class="tile is-parent is-vertical">
-              <article class="tile is-child notification is-info has-text-centered">
-                <p class="title is-family-code">WHAT</p>
-                  <div class='container'>
-                    <p class="subtitle">We are devoted to build a platform connecting real estate owners with knowledgeable workers and students. A gate to transform your work-from-anywhere experience by using different spaces from anywhere.</p>
+      <div className="tile is-ancestor">
+        <div className="tile is-vertical is-8">
+          <div className="tile">
+            <div className="tile is-parent is-vertical">
+              <article className="tile is-child notification is-info has-text-centered">
+                <p className="title is-family-code">WHAT</p>
+                  <div className='container'>
+                    <p className="subtitle">We are devoted to build a platform connecting real estate owners with knowledgeable workers and students. A gate to transform your work-from-anywhere experience by using different spaces from anywhere.</p>
                   </div>
                 </article>
             </div>
-            <div class="tile is-parent">
-              <article class="tile is-child notification is-info has-text-centered">
-                <p class="title is-family-code">WHY</p>
-                <p class="subtitle">It's easy!</p>
-                <div class='container'>
-                  <p class="subtitle">A single portal that allows you to keep everything under control: accommodation, workspaces reservations, courses, sports and local activities, networking and volunteering.</p>
-                  <p class="subtitle">Everything will always be at your fingertips!</p>
+            <div className="tile is-parent">
+              <article className="tile is-child notification is-info has-text-centered">
+                <p className="title is-family-code">WHY</p>
+                <p className="subtitle">It's easy!</p>
+                <div className='container'>
+                  <p className="subtitle">A single portal that allows you to keep everything under control: accommodation, workspaces reservations, courses, sports and local activities, networking and volunteering.</p>
+                  <p className="subtitle">Everything will always be at your fingertips!</p>
                 </div>
               </article>
             </div>
           </div>
-          <div class="tile is-parent">
-            <article class="tile is-child notification is-info has-text-centered">
-              <p class="title is-family-code">WHEN</p>
-              <p class="subtitle">Whatever you want!</p>
-              <p class="subtitle">A short period of one day! A short rent! A long rent! Make sure you have necessary things in your bag and that's it! You are ready to join us.</p>
+          <div className="tile is-parent">
+            <article className="tile is-child notification is-info has-text-centered">
+              <p className="title is-family-code">WHEN</p>
+              <p className="subtitle">Whatever you want!</p>
+              <p className="subtitle">A short period of one day! A short rent! A long rent! Make sure you have necessary things in your bag and that's it! You are ready to join us.</p>
 
             </article>
           </div>
         </div>
-        <div class="tile is-parent">
-          <article class="tile is-child notification is-info has-text-centered">
-            <div class="content">
-              <p class="title is-family-code">WHO</p>
-              <p class="subtitle">We appeal to:</p>
-              <div class='container'>
-                <p class="subtitle"> Remote workers who want to combine productivity with the thrill of discovery and personal growth.</p>
-                <p class="subtitle">Digital nomads and Freelancers looking for the right place to live an unforgettable adventure between local culture, learning and lagoon activities.</p>
-                <p class="subtitle">Companies wishing to find a stimulating place for their teams, home to makers and small entrepreneurs, away from the hustle and bustle of the big city. </p>
+        <div className="tile is-parent">
+          <article className="tile is-child notification is-info has-text-centered">
+            <div className="content">
+              <p className="title is-family-code">WHO</p>
+              <p className="subtitle">We appeal to:</p>
+              <div className='container'>
+                <p className="subtitle"> Remote workers who want to combine productivity with the thrill of discovery and personal growth.</p>
+                <p className="subtitle">Digital nomads and Freelancers looking for the right place to live an unforgettable adventure between local culture, learning and lagoon activities.</p>
+                <p className="subtitle">Companies wishing to find a stimulating place for their teams, home to makers and small entrepreneurs, away from the hustle and bustle of the big city. </p>
               </div>
             </div>
           </article>
         </div>
       </div>
       </section>
-      <section class='section'>
-        <h1 class="title has-text-centered">Discover your next place!</h1>
-        <h2 class="subtitle has-text-centered">Our offer around Italy</h2>
+      <section className='section'>
+        <h1 className="title has-text-centered">Discover your next place!</h1>
+        <h2 className="subtitle has-text-centered">Our offer around Italy</h2>
         <br/>
+        <CitySelector />
+        {/*       
         {splitEvery(cities, 4).map((group) => (
           <div className="columns is-multiline">
             {group.map((city) => (
@@ -134,6 +134,7 @@ function Home() {
             ))}
           </div>
         ))}
+        */} 
       </section>
       <Footer />
     </div>

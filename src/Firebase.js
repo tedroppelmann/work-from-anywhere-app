@@ -95,12 +95,14 @@ const logout = () => {
   signOut(auth);
 };
 
-const addPlace = async (name, address, landlord) => {
+const addPlace = async (name, address, landlord, city, description) => {
   try {
     await addDoc(collection(db, "places"), {
       name,
       address,
       landlord,
+      city,
+      description,
     });
   } catch (err) {
     console.error(err);

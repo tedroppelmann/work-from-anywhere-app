@@ -4,6 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 import CalendarComponent from '../components/Calendar'
 import Spinner from '../components/Spinner'
+import ServicesList from '../components/ServicesList';
 import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 import { AiOutlineWifi } from "react-icons/ai";
 import { GiSofa } from "react-icons/gi";
@@ -41,69 +42,71 @@ function Place() {
 
     return (
         <div>
-            <section class='section'>
-                <div class='columns is-vcentered is-centered is-mobile'>
-                    <div class='column is-narrow'>
-                        <MdNavigateBefore size={80}/>
+            <section className='section'>
+                <div className='columns is-vcentered is-centered is-mobile'>
+                    <div className='column is-narrow'>
+                        <MdNavigateBefore size={50}/>
                     </div>
-                    <div class='column is-one-quarter'>
-                        <figure class="image is-square">
+                    <div className='column is-one-quarter'>
+                        <figure className="image is-square">
                             <img src={require('../storage/place/photo_1.jpg')}/>
                         </figure>
                     </div>
-                    <div class='column is-one-quarter'>
-                        <figure class="image is-square">
+                    <div className='column is-one-quarter'>
+                        <figure className="image is-square">
                             <img src={require('../storage/place/photo_2.jpg')}/>
                         </figure>
                     </div>
-                    <div class='column is-one-quarter'>
-                        <figure class="image is-square">
+                    <div className='column is-one-quarter'>
+                        <figure className="image is-square">
                             <img src={require('../storage/place/photo_3.jpg')}/>
                         </figure>
                     </div>
-                    <div class='column is-narrow'>
-                        <MdNavigateNext size={80}/>
+                    <div className='column is-narrow'>
+                        <MdNavigateNext size={50}/>
                     </div>
                 </div>
             </section>
-            <section class='section'>
-                <h1 class="title is-3 has-text-centered">{place.name}</h1>
-                <h1 class="subtitle has-text-centered">{place.address}</h1>
+            <section className='section'>
+                <h1 className="title is-3 has-text-centered">{place.name}</h1>
+                <h1 className="subtitle has-text-centered">{place.address}</h1>
             </section>
-            <div class='columns is-centered'>
-                <div class='column is-half'>
-                    <div class='section'>
-                        <div class='box'>
-                            <h1 class="title is-4">Facilities</h1>
-                            <div class='columns is-mobile'>
-                                <div class='column is-narrow'>
+            <div className='columns is-centered'>
+                <div className='column is-half'>
+                    <div className='section'>
+                        <div className='box'>
+                            <h1 className="title is-4">Facilities</h1>
+                            <div className='columns is-mobile'>
+                                <div className='column is-narrow'>
                                     <AiOutlineWifi size={50}/>
                                 </div>
-                                <div class='column is-narrow'>
+                                <div className='column is-narrow'>
                                     <GiSofa size={50}/>
                                 </div>
-                                <div class='column is-narrow'>
+                                <div className='column is-narrow'>
                                     <RiArtboardFill size={50}/>
                                 </div>
-                                <div class='column is-narrow'>
+                                <div className='column is-narrow'>
                                     <FaSwimmingPool size={50}/>
                                 </div>
                             </div>
                         </div>
-                        <div class='box'>
-                            <h1 class="title is-4">Description</h1>
+                        <div className='box'>
+                            <h1 className="title is-4">Description</h1>
+                            <h2 className='subtitle'>{place.description}</h2>
                         </div>
-                        <div class='box'>
-                            <h1 class="title is-4">Location</h1>
-                            <figure class="image is-square">
+                        <div className='box'>
+                            <h1 className="title is-4">Location</h1>
+                            <figure className="image is-square">
                                 <img src={require('../storage/maps/general_map.jpg')}/>
                             </figure>
                         </div>
                     </div>
                 </div>
-                <div class='column is-narrow'>
-                    <div class='section'>
+                <div className='column is-narrow'>
+                    <div className='section'>
                         <CalendarComponent place={params.placeId} name={place.name}/>
+                        <ServicesList />
                     </div>
                 </div>
             </div>

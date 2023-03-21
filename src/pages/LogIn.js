@@ -24,14 +24,14 @@ function LogIn() {
   }
 
   return (
-    <div class="section is-medium">
-      <div class='box column is-half is-offset-one-quarter'>
-        <h1 class="title">Log in</h1>
-        <div class="field">
-          <label class="label">Email</label>
-          <div class="control">
+    <div className="section is-medium">
+      <div className='box column is-half is-offset-one-quarter'>
+        <h1 className="title">Log in</h1>
+        <div className="field">
+          <label className="label">Email</label>
+          <div className="control">
             <input 
-              class="input" 
+              className="input" 
               type="email" 
               placeholder="e.g. alexsmith@gmail.com"
               value={email}
@@ -39,11 +39,11 @@ function LogIn() {
             />
           </div>
         </div>
-        <div class="field">
-          <label class="label">Password</label>
-          <div class="control">
+        <div className="field">
+          <label className="label">Password</label>
+          <div className="control">
             <input 
-              class="input" 
+              className="input" 
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -51,11 +51,11 @@ function LogIn() {
           </div>
         </div>
         <div>
-          <button class="button is-info" onClick={() => logInWithEmailAndPassword(email, password)}>
+          <button className="button is-info" onClick={() => logInWithEmailAndPassword(email, password)}>
             <strong>Log in</strong>
           </button>
         </div>
-        <button class="button is-text is-fullwidth" onClick={becomeMember}>
+        <button className="button is-text is-fullwidth" onClick={becomeMember}>
           Or become a member
         </button>
       </div>

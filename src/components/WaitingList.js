@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import { addInterested } from "../Firebase";
 import { ImWarning } from "react-icons/im";
 
@@ -7,17 +7,20 @@ function WaitingList() {
     const [email, setEmail] = useState('');
 
     const submit = () => {
-        addInterested(email);
-        setInterested(true);
+        if (email.length > 0) {
+            addInterested(email);
+            setInterested(true);
+        }
     }
+    
     return (
-        <div class="section is-medium has-text-centered">
+        <div className="section is-medium has-text-centered">
             <ImWarning size={50} />
             <br/>
-            <h1 class='title'>
+            <h1 className='title'>
                 Do you like the idea of working from anywhere?
             </h1>
-            <h2 class='subtitle'>
+            <h2 className='subtitle'>
                 Subscribe now and get access to your personal dashboard!
             </h2>
             <div>
@@ -26,26 +29,26 @@ function WaitingList() {
             <div>
                 Do you want to stay informed about our launch? Give us your email.
             </div>
-            <section class='section'>
-                <div class='columns is-centered'>
-                    <div class='column is-narrow'>
-                        <div class='container'>
-                        <div class="field has-addons">
-                        <div class="control">
+            <section className='section'>
+                <div className='columns is-centered'>
+                    <div className='column is-narrow'>
+                        <div className='container'>
+                        <div className="field has-addons">
+                        <div className="control">
                             <input 
-                                class="input" 
+                                className="input" 
                                 type="email" 
                                 placeholder="Email" 
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div class="control">
+                        <div className="control">
                             {interested ? 
-                                <a class="button is-success disabled">
+                                <a className="button is-success disabled">
                                     Done!
                                 </a>
                             :
-                                <a class="button is-info" onClick={submit}>
+                                <a className="button is-info" onClick={submit}>
                                     Subscribe
                                 </a>
                             }

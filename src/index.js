@@ -8,6 +8,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import ScrollToTop from './components/ScrollToTop';
 
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
@@ -24,6 +25,7 @@ import Services from './pages/Services';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="/" element={<Home />} />
@@ -33,10 +35,12 @@ ReactDOM.render(
           <Route path="create_place" element={<CreatePlace />} />
           <Route path=":cityName" element={<Places />} />
           <Route path="places/:placeId" element={<Place />} />
+          {/* 
           <Route path="profile" element={<Profile />} >
             <Route path="personal_data" element={<PersonalData />} />
             <Route path="next_bookings" element={<NextBookings />} />
           </Route>
+          */}
           <Route path="places/:placeId/services" element={<Services />} />
           <Route
             path="*"

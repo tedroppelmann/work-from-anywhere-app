@@ -1,14 +1,16 @@
 import React, {useState} from 'react'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import Slots from './Slots';
+// import Slots from './Slots';
 import { useNavigate } from 'react-router-dom'
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../Firebase";
+import { auth, analytics } from "../Firebase";
+import { logEvent } from "firebase/analytics";
 
 function CalendarComponent(props) {
     const [user, loading, error] = useAuthState(auth);
     const [date, setDate] = useState(new Date());
+    const [diffDates, setDiffDates] = useState(0);
     const [dateSelected, setDateSelected] = useState(false);
     const navigate = useNavigate();
     const placeId = props.place;
@@ -18,20 +20,24 @@ function CalendarComponent(props) {
     const onChange = date => {
         setDate(date);
         setDateSelected(true);
+        const diffDates = Math.ceil((date[1] - date [0]) / (1000 * 60 * 60 * 24));
+        setDiffDates(diffDates);
     }
 
     const sumbit = () => {
         if (user) {
             //Fill when the app is ready to do it.
         } else {
+            const diff = 
+            logEvent(analytics, 'days_selected', { diff: diffDates});
             navigate('/places/' + placeId + '/services');
         }
     }
 
     return (
-        <div class='box'>
-            <h1 class="title is-4">Book</h1>
-            <h2 class="subtitle">Start by choosing your dates</h2>
+        <div className='box'>
+            <h1 className="title is-4">Book</h1>
+            <h2 className="subtitle">Start by choosing your dates</h2>
             <Calendar 
                 onChange={onChange} 
                 
@@ -43,14 +49,14 @@ function CalendarComponent(props) {
             />
             {/*<Slots date={date} placeId={placeId} placeName={placeName}/>*/}
             <br/>
-            <div class='columns is-centered'>
-                <div class='column is-narrow'>
+            <div className='columns is-centered'>
+                <div className='column is-narrow'>
                     {dateSelected ? 
-                        <button class="button is-info" onClick={sumbit}>
+                        <button className="button is-info" onClick={sumbit}>
                             Next
                         </button>
                     :
-                        <button class="button is-info" disabled>
+                        <button className="button is-info" disabled>
                             Next
                         </button>
                     }

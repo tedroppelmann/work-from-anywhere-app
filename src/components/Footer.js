@@ -2,12 +2,16 @@ import React from 'react'
 
 function Footer() {
     return (
-        <footer class="footer">
-            <div class="content has-text-centered">
+        <footer className="footer">
+            <div className="content has-text-centered">
                 <p>
-                <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-                is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+                <strong>Work from Anywhere</strong> by WfA team.
+                </p>
+                <p>
+                Work from anywhere is in <strong>beta testing</strong>! The site is a draft of the services that will only be fully available at the launch of the platform.
+                </p>
+                <p>
+                <a href="https://www.freepik.es/vectores/silvestre">Vector of silvestre created by storyset - www.freepik.es</a>
                 </p>
             </div>
         </footer>

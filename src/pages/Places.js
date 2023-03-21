@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../Firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import Spinner from '../components/Spinner'
@@ -46,11 +46,10 @@ function Places() {
     }
 
     return (
-        <div class='section'>
-            <h1 class="title is-3">Places in {params.cityName}</h1>
-            {splitEvery(places, 4).map((group) => (
+        <div className='section'>
+            <h1 className="title is-3">Places in {params.cityName}</h1>
             <div className="columns is-multiline">
-                {group.map((place) => (
+                {places.map((place) => (
                 <div className="column is-one-quarter" key={place.id}>
                     <div className="card is-clickable" 
                     onClick={() => navigate('/places/'+ place.id, {
@@ -60,7 +59,7 @@ function Places() {
                     })
                     }>
                     <div className="card-content">
-                        <figure class="image is-256x256">
+                        <figure className="image is-5by4">
                             <img src={require('../storage/place/photo_0.jpg')}/>
                         </figure>
                         <br/>
@@ -71,7 +70,6 @@ function Places() {
                 </div>
                 ))}
             </div>
-            ))}
         </div>
     )
 }
